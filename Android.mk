@@ -8,7 +8,11 @@ LOCAL_MODULE_CLASS := APPS
 LOCAL_MODULE_TAGS := debug
 LOCAL_MULTILIB := first
 LOCAL_MODULE_SUFFIX := $(COMMON_ANDROID_PACKAGE_SUFFIX)
-LOCAL_CERTIFICATE := platform
+# only PRESIGNED here can make the update possible
+# platform and EXTERNAL will cause INSTALL_FAILED_UPDATE_INCOMPATIBLE error
+# and following message in logcat, like
+# W PackageManager: Package com.qihoo.yunpan signatures do not match the previously installed version; ignoring!
+LOCAL_CERTIFICATE := PRESIGNED
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
@@ -17,7 +21,8 @@ LOCAL_SRC_FILES := $(LOCAL_MODULE).apk
 LOCAL_MODULE_CLASS := APPS
 LOCAL_MODULE_TAGS := debug
 LOCAL_MODULE_SUFFIX := $(COMMON_ANDROID_PACKAGE_SUFFIX)
-LOCAL_CERTIFICATE := platform
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_MULTILIB := 32
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
@@ -26,5 +31,5 @@ LOCAL_SRC_FILES := $(LOCAL_MODULE).apk
 LOCAL_MODULE_CLASS := APPS
 LOCAL_MODULE_TAGS := debug
 LOCAL_MODULE_SUFFIX := $(COMMON_ANDROID_PACKAGE_SUFFIX)
-LOCAL_CERTIFICATE := platform
+LOCAL_CERTIFICATE := PRESIGNED
 include $(BUILD_PREBUILT)
